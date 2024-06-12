@@ -1,7 +1,7 @@
 @php
     use Carbon\Carbon;
 @endphp
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -680,11 +680,13 @@
             <ul>
                 <div class="imp-links">
                     <li><a href="#top"><i class="bi bi-house-door-fill"></i>Inicio</a></li>
-                    <li><a href="{{route('profile.index', ['user_id' => auth()->user()->id])}}"><i class="bi bi-person-fill"></i>Perfil</a></li>
+                    <li><a href="{{route('profile.index', ['user_id' => auth()->user()->id])}}"><i
+                                class="bi bi-person-fill"></i>Perfil</a></li>
                     <li><a href="{{route('erro')}}"><i class="bi bi-chat-dots-fill"></i>Mensagens</a></li>
                     <li><a href="{{route('erro')}}"><i class="bi bi-bell-fill"></i>Notificações</a></li>
                     <li><a href="{{route('profile.edit')}}"><i class="bi bi-gear-fill"></i>Configurações</a></li>
-                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"><i class="bi bi-box-arrow-right"></i>Sair</a></li>
+                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"><i
+                                class="bi bi-box-arrow-right"></i>Sair</a></li>
                 </div>
             </ul>
         </div>
@@ -716,15 +718,19 @@
         @foreach($feeds as $feed)
             <div class="post-container">
                 <div class="post-roll">
+                        <a href="{{route('profile.index', ['user_id' => $feed->user->id])}}">
                     <div class="profile-post-icon">
-                        <img src="{{asset($feed->user->icon)}}" alt="">
-                        <div><p>{{$feed->user->name}}</p>
-                            @php
-                                $date = Carbon::parse($feed->created_at);
-                            @endphp
-                            <small>{{$date->isoFormat('D [de] MMMM [de] YYYY [às] HH:mm')}}<i class="bi bi-caret-down-fill"></i></small>
-                        </div>
+                            <img src="{{asset($feed->user->icon)}}" alt="">
+                            <div><p>{{$feed->user->name}}</p>
+
+                                @php
+                                    $date = Carbon::parse($feed->created_at);
+                                @endphp
+                                <small>{{$date->isoFormat('D [de] MMMM [de] YYYY [às] HH:mm')}}<i
+                                        class="bi bi-caret-down-fill"></i></small>
+                            </div>
                     </div>
+                        </a>
 
 
                     <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
@@ -740,9 +746,9 @@
 
                 <div class="post-roll">
                     <div class="act-icons">
-                        <div><i class="bi bi-heart-fill"></i>172</div>
-                        <div><i class="bi bi-chat-fill"></i>35</div>
-                        <div><i class="bi bi-send-fill"></i></i>21</div>
+                        <div><i class="bi bi-heart-fill"></i>0</div>
+                        <div><i class="bi bi-chat-fill"></i>0</div>
+                        <div><i class="bi bi-send-fill"></i></i>0</div>
                     </div>
 
                     <div class="post-profile-icon">

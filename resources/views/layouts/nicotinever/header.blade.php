@@ -827,5 +827,7 @@
         <input type="text" name="busca" maxlength="50" placeholder="Buscar">
     </div>
 
-    <img src="{{asset(auth()->user()->icon)}}" alt="Foto de perfil" class="ftperfil-header">
+    <a href="{{route('profile.index',['user_id' => auth()->user()->id])}}">
+        <img src="{{asset(auth()->user()->icon)}}" alt="Foto de perfil" class="ftperfil-header">
+    </a>
 </header>

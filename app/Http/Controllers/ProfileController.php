@@ -13,10 +13,11 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
 
-    public function index(User $user)
+    public function index($user)
     {
-        $feeds = auth()->user()->feeds;
-        return view('profile.index', compact('feeds'));
+        $user = User::find($user);
+        $feeds = $user->feeds;
+        return view('profile.index', compact(['feeds', 'user']));
     }
 
     /**
