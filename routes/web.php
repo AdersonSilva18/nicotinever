@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('feed', FeedController::class)->only(['index', 'store', 'destroy']);
 
     Route::get('erro', function (){return view('error.error404');})->name('erro');
+
+    Route::post('/saveicon', [ProfileController::class, 'attIcon'])->name('attIcon');
 });
 
 require __DIR__.'/auth.php';

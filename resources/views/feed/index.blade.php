@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -659,7 +662,7 @@
         border: none;
         border-radius: 20px;
         padding: 10px 10px;
-        margin-left: 300px;
+        margin-left: auto;
     }
 
     .btn-publicar:hover {
@@ -670,18 +673,18 @@
 <div class="container">
     <div class="left-sidebar">
         <div class="user-profile">
-            <img src="{{asset('imagens/user-profile.png')}}" alt="">
-            <div><p>Joana Gonçalves</p></div>
+            <img src="{{asset(auth()->user()->icon)}}" alt="">
+            <div><p>{{auth()->user()->name}}</p></div>
         </div>
         <div class="menu">
             <ul>
                 <div class="imp-links">
                     <li><a href="#top"><i class="bi bi-house-door-fill"></i>Inicio</a></li>
-                    <li><a href="#"><i class="bi bi-person-fill"></i>Perfil</a></li>
-                    <li><a href="#"><i class="bi bi-chat-dots-fill"></i>Mensagens</a></li>
-                    <li><a href="#"><i class="bi bi-bell-fill"></i>Notificações</a></li>
-                    <li><a href="#"><i class="bi bi-gear-fill"></i>Configurações</a></li>
-                    <li><a href="index.html"><i class="bi bi-box-arrow-right"></i>Sair</a></li>
+                    <li><a href="{{route('profile.index', ['user_id' => auth()->user()->id])}}"><i class="bi bi-person-fill"></i>Perfil</a></li>
+                    <li><a href="{{route('erro')}}"><i class="bi bi-chat-dots-fill"></i>Mensagens</a></li>
+                    <li><a href="{{route('erro')}}"><i class="bi bi-bell-fill"></i>Notificações</a></li>
+                    <li><a href="{{route('profile.edit')}}"><i class="bi bi-gear-fill"></i>Configurações</a></li>
+                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"><i class="bi bi-box-arrow-right"></i>Sair</a></li>
                 </div>
             </ul>
         </div>
@@ -690,8 +693,8 @@
     <div class="main-content">
         <div class="write-post-container">
             <div class="user-profile">
-                <img src="{{asset('imagens/user-profile.png')}}" alt="">
-                <div><p>Joana Gonçalves</p></div>
+                <img src="{{asset(auth()->user()->icon)}}" alt="">
+                <div><p>{{auth()->user()->name}}</p></div>
                 <small>Publico <i class="bi bi-caret-down-fill"></i></small>
             </div>
 
@@ -716,7 +719,10 @@
                     <div class="profile-post-icon">
                         <img src="{{asset($feed->user->icon)}}" alt="">
                         <div><p>{{$feed->user->name}}</p>
-                            <small>12 de Junho de 2024 às 9:13 <i class="bi bi-caret-down-fill"></i></small>
+                            @php
+                                $date = Carbon::parse($feed->created_at);
+                            @endphp
+                            <small>{{$date->isoFormat('D [de] MMMM [de] YYYY [às] HH:mm')}}<i class="bi bi-caret-down-fill"></i></small>
                         </div>
                     </div>
 

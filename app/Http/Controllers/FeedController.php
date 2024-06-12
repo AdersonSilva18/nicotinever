@@ -9,7 +9,7 @@ class FeedController extends Controller
 {
     public function index()
     {
-        $feeds = Feed::all();
+        $feeds = Feed::orderByDesc('created_at')->get();
         return view('feed.index', compact('feeds'));
     }
 

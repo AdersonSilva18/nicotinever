@@ -16,8 +16,9 @@ class ProfileController extends Controller
     public function index(User $user)
     {
         $feeds = auth()->user()->feeds;
-        return view('profile.index',compact('feeds'));
+        return view('profile.index', compact('feeds'));
     }
+
     /**
      * Display the user's profile form.
      */
@@ -63,5 +64,28 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function attIcon(Request $request)
+    {
+        $request->validate([
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $icon = $request->file('icon');
+        $filenameWithExt = $request->file('icon')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('icon')->getClientOriginalExtension();
+        $iconName = $filename . '_' . auth()->user->id . '_' . time() . '.' . $extension;
+
+        $icon->move(public_path('imagens'), $iconName);
+
+        $pathFinal = 'public/imagens/' . $iconName;
+
+        auth()->user->update([
+            'icon' => $pathFinal
+        ]);
+
+        return redirect()->route('profile.index');
     }
 }

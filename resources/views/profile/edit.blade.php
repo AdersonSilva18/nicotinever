@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{{--    <link rel="shortcut icon" type="image/x-icon" href="./images/logo(2).ico">--}}
+    {{--    <link rel="shortcut icon" type="image/x-icon" href="./images/logo(2).ico">--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <title>Nicotinever</title>
 </head>
@@ -637,67 +637,57 @@
         transition: 0.2s;
     }
 </style>
-<nav class="web">
-    <div id="top" class="nav-left">
-        <img src="{{asset('imagens/logo.jpg')}}" alt="Nicotinever" class="logo">
-        <ul>
-            <li><i class="bi bi-bullseye"></i></li>
-            <li><i class="bi bi-house-door-fill"></i></li>
-            <li><i class="bi bi-chat-dots-fill"></i></li>
-            <li><i class="bi bi-bell-fill"></i></li>
-        </ul>
-    </div>
-
-    <div class="nav-right">
-        <div class="search-box">
-            <i class="bi bi-search"></i>
-            <input type="text" placeholder="Buscar">
-        </div>
-    </div>
-
-    <div class="profile-icon">
-        <div class="online">
-            <img src="{{asset('imagens/user-profile.png')}}" alt="">
-        </div>
-    </div>
-</nav>
+@include('layouts.nicotinever.header')
 
 <div class="main-info">
 
-    <div class="profile-image">
-        <h1>Atualize a sua foto de perfil.</h1>
-        <p>Escolha uma foto de perfil que mostre o seu rosto.</p>
-        @if($user->hasIcon())
+    <form method="post" action="{{ route('attIcon') }}">
+        @csrf
+        <div class="profile-image">
+            <h1>Atualize a sua foto de perfil.</h1>
+            <p>Escolha uma foto de perfil que mostre o seu rosto.</p>
             <img src="{{ asset($user->icon) }}" alt="Nicotinever" class="logo">
-        @else
-            <img src="{{asset('imagens/user-profile.png')}}" for="perfil-foto" alt="">
-        @endif
-        <input type="file" name="icon" id="file" style="display: none;" accept="image/jpeg, image/png" />
-        <label for="file" class="btn">Escolher foto</label>
-    </div>
+            <div style="display: flex">
+                <input type="file" name="icon" id="file" style="display: none;" accept="image/jpeg, image/png"/>
+                <label for="file" class="btn">Escolher foto</label>
 
-    <div class="profile-info">
-        <h1>Informações da conta</h1>
-        <p>Atuialize o seu nome de usuário e e-mail.</p>
+                <input type="submit" id="submitfile" style="display: none;"/>
+                <label for="submitfile" class="btn" style="margin-left: 40px">Salvar</label>
+            </div>
+        </div>
+    </form>
 
-        <label for="name">Nome</label>
-        <input type="text" id="name" name="name"></input>
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email"></input>
-        <input type="submit" value="Salvar">
+    <form method="post" action="{{ route('profile.update') }}">
+        <div class="profile-info">
+            <h1>Informações da conta</h1>
+            <p>Atuialize o seu nome de usuário e e-mail.</p>
 
-    </div>
+            @csrf
+            @method('patch')
 
-    <div class="update-password">
-        <h1>Atualize a sua senha</h1>
-        <p>Atualize sua senha e mantenha sua segurança</p>
-        <label for="atual">Senha atual.</label>
-        <input type="password" id="atual" name="atual"></input>
-        <label for="new">Nova senha</label>
-        <input type="password" id="new" name="new"></input>
-        <label for="confirm">Confirme a nova senha</label>
-        <input type="password" name="confirm" id="confirm"></input>
-        <input type="submit" value="Salvar">
-    </div>
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" value="{{$user->name}}"/>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" value="{{$user->email}}"/>
+            <input type="submit" value="Salvar">
+        </div>
+    </form>
+
+    <form method="post" action="{{ route('password.update') }}">
+        <div class="update-password">
+            <h1>Atualize a sua senha</h1>
+            <p>Atualize sua senha e mantenha sua segurança</p>
+
+            @csrf
+            @method('put')
+            <label for="atual">Senha atual.</label>
+            <input type="password" id="atual" name="current_password"></input>
+            <label for="new">Nova senha</label>
+            <input type="password" id="new" name="password"></input>
+            <label for="confirm">Confirme a nova senha</label>
+            <input type="password" name="password_confirmation" id="confirm"></input>
+            <input type="submit" value="Salvar">
+        </div>
+    </form>
 
 </div>
