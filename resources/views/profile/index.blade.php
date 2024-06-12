@@ -16,7 +16,7 @@
 
 <body>
 <style>
-    @charset "UTF-8";
+    
 
     * {
         font-family: Inter, sans-serif;
@@ -320,6 +320,10 @@
         margin-bottom: 10px;
         color: #28c89393;
         width: fit-content;
+    }
+
+    .left-siebar button{
+        color: #28c89393;
     }
 
 
