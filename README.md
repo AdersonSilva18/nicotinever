@@ -1,5 +1,7 @@
 # Nicotinever
 
+url: https://nicotinever.vercel.app
+
 ## Description
 
 
