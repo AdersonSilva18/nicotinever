@@ -16,7 +16,7 @@
 
 <body>
 <style>
-    
+
 
     * {
         font-family: Inter, sans-serif;
@@ -562,6 +562,9 @@
 
                     <p class="post-text">
                         {{$feed->comentario}}
+                        @if($feed->image !== null)
+                            <img src="{{asset($feed->image)}}" alt="" class="post-img">
+                        @endif
                     </p>
 
 
