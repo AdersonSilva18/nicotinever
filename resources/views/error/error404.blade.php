@@ -6,7 +6,12 @@
     <title>Error page</title>
 </head>
 <body>
-<style>* {
+<style>
+    body {
+        height: 100vh;
+    }
+
+    * {
         background-color: #001526;
         font-family: Roboto, sans-serif;
         color: whitesmoke;
@@ -37,11 +42,11 @@
         display: flex;
         align-items: center;
         margin-left: 10px;
-        font-size: 500;
+        font-weight: 500;
     }
 
     .error-page-content {
-        font-size: 500;
+        font-weight: 500;
     }
 
     .error-page-text > h1 {
@@ -188,13 +193,13 @@
 </style>
 <div class="container__error-page">
     <div class="error-page-header">
-        <img src="Backgound.png" width="30px">
-        <a href="home">Nicotinever</a>
+        <img src="{{asset('imagens/Backgound.png')}}" width="30px">
+        <a href="{{route('feed.index')}}">Nicotinever</a>
     </div>
     <hr/>
     <div class="error-page-content">
         <div class="error-page-image">
-            <img src="error-image.svg">
+            <img src="{{asset('imagens/error-image.svg')}}">
         </div>
         <div class="error-page-text">
             <h1>Infelizmente esse conteúdo ainda não foi desenvolvido</h1>

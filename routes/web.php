@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 //
@@ -21,6 +22,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::get('/profile/{user_id}', [ProfileController::class, 'index'])->name('profile.index');
+
+    Route::redirect('/', '/feed');
+
+    Route::resource('feed', FeedController::class)->only(['index', 'store', 'destroy']);
+
+    Route::get('erro', function (){return view('error.error404');})->name('erro');
 });
 
 require __DIR__.'/auth.php';

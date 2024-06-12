@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{{--    <link rel="shortcut icon" type="image/x-icon" href="./images/logo(2).ico">--}}
+    {{--    <link rel="shortcut icon" type="image/x-icon" href="./images/logo(2).ico">--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <title>Nicotinever</title>
 </head>
@@ -228,7 +228,7 @@
 
     .post-input-container textarea {
         resize: none;
-        width: 350px;
+        width: 100%;
         color: aliceblue;
         padding: 10px;
         border: none;
@@ -476,8 +476,8 @@
         .select {
             background-color: #28C892;
             position: absolute;
-            left: 40%;
-            width: 20%;
+            left: 66.6666666666666%;
+            width: 33%;
             height: 3px;
             transition: left 0.5s ease;
         }
@@ -604,7 +604,6 @@
     }
 
     .update-password {
-        margin: 30px 0;
         box-shadow: #28c89383 0px 0px 10px 0px;
         color: #28C892;
         background-color: #001526;
@@ -636,68 +635,356 @@
         color: #fff;
         transition: 0.2s;
     }
+
+    .btn-foto {
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    .btn-foto i {
+        font-size: 20px;
+        color: #28C892;
+        margin-right: 10px;
+
+    }
+
+    .btn-foto:hover {
+        transform: scale(1.1);
+    }
+
+    .btn-publicar {
+        background-color: #28C892;
+        cursor: pointer;
+        transition: .2s;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 10px;
+        margin-left: 300px;
+    }
+
+    .btn-publicar:hover {
+        transform: scale(1.1);
+    }
 </style>
-<nav class="web">
-    <div id="top" class="nav-left">
-        <img src="{{asset('imagens/logo.jpg')}}" alt="Nicotinever" class="logo">
-        <ul>
-            <li><i class="bi bi-bullseye"></i></li>
-            <li><i class="bi bi-house-door-fill"></i></li>
-            <li><i class="bi bi-chat-dots-fill"></i></li>
-            <li><i class="bi bi-bell-fill"></i></li>
-        </ul>
-    </div>
-
-    <div class="nav-right">
-        <div class="search-box">
-            <i class="bi bi-search"></i>
-            <input type="text" placeholder="Buscar">
-        </div>
-    </div>
-
-    <div class="profile-icon">
-        <div class="online">
+@include('layouts.nicotinever.header')
+<div class="container">
+    <div class="left-sidebar">
+        <div class="user-profile">
             <img src="{{asset('imagens/user-profile.png')}}" alt="">
+            <div><p>Joana Gonçalves</p></div>
+        </div>
+        <div class="menu">
+            <ul>
+                <div class="imp-links">
+                    <li><a href="#top"><i class="bi bi-house-door-fill"></i>Inicio</a></li>
+                    <li><a href="#"><i class="bi bi-person-fill"></i>Perfil</a></li>
+                    <li><a href="#"><i class="bi bi-chat-dots-fill"></i>Mensagens</a></li>
+                    <li><a href="#"><i class="bi bi-bell-fill"></i>Notificações</a></li>
+                    <li><a href="#"><i class="bi bi-gear-fill"></i>Configurações</a></li>
+                    <li><a href="index.html"><i class="bi bi-box-arrow-right"></i>Sair</a></li>
+                </div>
+            </ul>
         </div>
     </div>
+
+    <div class="main-content">
+        <div class="write-post-container">
+            <div class="user-profile">
+                <img src="{{asset('imagens/user-profile.png')}}" alt="">
+                <div><p>Joana Gonçalves</p></div>
+                <small>Publico <i class="bi bi-caret-down-fill"></i></small>
+            </div>
+
+            <form action="{{route('feed.store')}}" method="post">
+                @csrf
+                <div class="post-input-container">
+                    <textarea name="comentario" rows="3" placeholder="O que Você está pensando?"></textarea>
+                    <div class="add-post-links">
+                        <input type="file" id="file" name="image" style="display: none;"
+                               accept="image/jpeg, image/png"></input>
+                        <label for="file" class="btn-foto"><i class="bi bi-camera-fill"></i></label>
+                        <input type="submit" value="Publicar" class="btn-publicar">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        @foreach($feeds as $feed)
+            <div class="post-container">
+                <div class="post-roll">
+                    <div class="profile-post-icon">
+                        <img src="{{asset($feed->user->icon)}}" alt="">
+                        <div><p>{{$feed->user->name}}</p>
+                            <small>12 de Junho de 2024 às 9:13 <i class="bi bi-caret-down-fill"></i></small>
+                        </div>
+                    </div>
+
+
+                    <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
+                </div>
+
+                <p class="post-text">
+                    {{$feed->comentario}}
+                    @if($feed->image !== null)
+                        <img src="{{asset('imagens/pesca.jpg')}}" alt="" class="post-img">
+                    @endif
+                </p>
+
+
+                <div class="post-roll">
+                    <div class="act-icons">
+                        <div><i class="bi bi-heart-fill"></i>172</div>
+                        <div><i class="bi bi-chat-fill"></i>35</div>
+                        <div><i class="bi bi-send-fill"></i></i>21</div>
+                    </div>
+
+                    <div class="post-profile-icon">
+                        <img src="{{asset($feed->user->icon)}}" alt="">
+                        <i class="bi bi-caret-down-fill"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        @endforeach
+
+        <div class="post-container">
+            <div class="post-roll">
+                <div class="profile-post-icon">
+                    <img src="{{asset('imagens/aderson.jpg')}}" alt="">
+                    <div><p>Aderson Bituca</p>
+                        <small>12 de Junho de 2024 às 9:13 <i class="bi bi-caret-down-fill"></i></small>
+                    </div>
+                </div>
+
+
+                <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
+            </div>
+
+            <p class="post-text">
+                Ansioso pro Natal😎👍
+                <a href="#">#PapaiNoel</a>
+                <a href="#">#FelizNatal</a>
+                <img src="{{asset('imagens/pesca.jpg')}}" alt="" class="post-img">
+            </p>
+
+
+            <div class="post-roll">
+                <div class="act-icons">
+                    <div><i class="bi bi-heart-fill"></i>172</div>
+                    <div><i class="bi bi-chat-fill"></i>35</div>
+                    <div><i class="bi bi-send-fill"></i></i>21</div>
+                </div>
+
+                <div class="post-profile-icon">
+                    <img src="{{asset('imagens/aderson.jpg')}}" alt="">
+                    <i class="bi bi-caret-down-fill"></i>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="post-container">
+            <div class="post-roll">
+                <div class="profile-post-icon">
+                    <img src="{{asset('imagens/Nycollas.jpg')}}" alt="">
+                    <div><p>Nycollas Desenbola</p>
+                        <small>9 de Junho de 2024 às 13:18 <i class="bi bi-caret-down-fill"></i></small>
+                    </div>
+                </div>
+
+
+                <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
+            </div>
+
+            <p class="post-text">
+                Futzinho pra comemorar 20 anos de fumar ✌
+                <a href="#">#Futebas</a>
+                <a href="#">#Paz</a>
+                <img src="{{asset('imagens/futizin.jpg')}}" alt="" class="post-img">
+            </p>
+
+
+            <div class="post-roll">
+                <div class="act-icons">
+                    <div><i class="bi bi-heart-fill"></i>587</div>
+                    <div><i class="bi bi-chat-fill"></i>359</div>
+                    <div><i class="bi bi-send-fill"></i></i>147</div>
+                </div>
+
+                <div class="post-profile-icon">
+                    <img src="{{asset('imagens/Nycollas.jpg')}}" alt="">
+                    <i class="bi bi-caret-down-fill"></i>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="post-container">
+            <div class="post-roll">
+                <div class="profile-post-icon">
+                    <img src="{{asset('imagens/Pedro.jpg')}}" alt="">
+                    <div><p>Pedro Passa o Fino</p>
+                        <small>8 de Junho de 2024 às 22:50 <i class="bi bi-caret-down-fill"></i></small>
+                    </div>
+                </div>
+
+
+                <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
+            </div>
+
+            <p class="post-text">
+                Desenvolvendo o Nicotinever 👨‍💻
+                <a href="#">#PapaiJava</a>
+                <a href="#">#EuAmoJava</a>
+                <img src="{{asset('imagens/java.jpg')}}" alt="" class="post-img">
+            </p>
+
+
+            <div class="post-roll">
+                <div class="act-icons">
+                    <div><i class="bi bi-heart-fill"></i>256</div>
+                    <div><i class="bi bi-chat-fill"></i>58</div>
+                    <div><i class="bi bi-send-fill"></i></i>39</div>
+                </div>
+
+                <div class="post-profile-icon">
+                    <img src="{{asset('imagens/Pedro.jpg')}}" alt="">
+                    <i class="bi bi-caret-down-fill"></i>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="post-container">
+            <div class="post-roll">
+                <div class="profile-post-icon">
+                    <img src="{{asset('imagens/miguel.jpg')}}" alt="">
+                    <div><p>Milguel Fininho</p>
+                        <small>11 de Junho de 2024 às 21:36 <i class="bi bi-caret-down-fill"></i></small>
+                    </div>
+                </div>
+
+
+                <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
+            </div>
+
+            <p class="post-text">
+                Amassando os newbas
+                <a href="#">#Valorant</a>
+                <a href="#">#Loud</a>
+                <img src="{{asset('imagens/valoras.jpg')}}" alt="" class="post-img">
+            </p>
+
+
+            <div class="post-roll">
+                <div class="act-icons">
+                    <div><i class="bi bi-heart-fill"></i>320</div>
+                    <div><i class="bi bi-chat-fill"></i>146</div>
+                    <div><i class="bi bi-send-fill"></i></i>51</div>
+                </div>
+
+                <div class="post-profile-icon">
+                    <img src="{{asset('imagens/miguel.jpg')}}" alt="">
+                    <i class="bi bi-caret-down-fill"></i>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="right-sidebar">
+        <div class="sidebar-title">
+            <h4>Eventos</h4>
+        </div>
+
+        <div class="event">
+            <div class="left-event">
+                <h3>28</h3>
+                <span>Jul</span>
+            </div>
+            <div class="right-event">
+                <h4>Super Muffato Fresh Run 2024</h4>
+                <p>Rede Mufftao</p>
+                <a href="https://encurtador.com.br/OAMcc" target="_blank">Mais Informações</a>
+            </div>
+        </div>
+
+        <div class="event">
+            <div class="left-event">
+                <h3>23</h3>
+                <span>Set</span>
+            </div>
+            <div class="right-event">
+                <h4>Semana Tecnológica 2024</h4>
+                <p>Unifil</p>
+                <a href="https://www.instagram.com/p/C74H2MARQUp/" target="_blank">Mais Informações</a>
+            </div>
+        </div>
+
+        <div class="sidebar-title">
+            <h4>Contatos</h4>
+            <a href="">Fechar Chats</a>
+        </div>
+
+        <div class="online-list">
+            <div class="online">
+                <img src="{{asset('imagens/aderson.jpg')}}" alt="Aderson">
+            </div>
+            <p>Aderson Bituca</p>
+        </div>
+        <div class="online-list">
+            <div class="online">
+                <img src="{{asset('imagens/miguel.jpg')}}" alt="Miguel">
+            </div>
+            <p>Miguel Fininho</p>
+        </div>
+        <div class="online-list">
+            <div class="online">
+                <img src="{{asset('imagens/Nycollas.jpg')}}" alt="Nycollas">
+            </div>
+            <p>Nycollas Desenbola</p>
+        </div>
+        <div class="online-list">
+            <div class="online">
+                <img src="{{asset('imagens/Pedro.jpg')}}" alt="Pedro">
+            </div>
+            <p>Pedro Passa o Fino</p>
+        </div>
+    </div>
+</div>
+<nav class="mobile">
+    <div class="barra">
+        <div class="select"></div>
+    </div>
+    <ul class="paginas">
+
+        <li class="item" onclick="selecionaMenu(0)"><img id="pagina-alvo" src="{{asset('imagens/target.svg')}}"
+                                                         alt="ícone de alvo"></li>
+        <li class="item" onclick="selecionaMenu(33.33333333333)"><i class="bi bi-house"></i></li>
+        <li class="item" onclick="selecionaMenu(66.7666666666666)"><i class="bi bi-person"></i></li>
+    </ul>
 </nav>
 
-<div class="main-info">
 
-    <div class="profile-image">
-        <h1>Atualize a sua foto de perfil.</h1>
-        <p>Escolha uma foto de perfil que mostre o seu rosto.</p>
-        @if($user->hasIcon())
-            <img src="{{ asset($user->icon) }}" alt="Nicotinever" class="logo">
-        @else
-            <img src="{{asset('imagens/user-profile.png')}}" for="perfil-foto" alt="">
-        @endif
-        <input type="file" name="icon" id="file" style="display: none;" accept="image/jpeg, image/png" />
-        <label for="file" class="btn">Escolher foto</label>
-    </div>
+</body>
+<script>
+    function selecionaMenu(posicao) {
+        const select = document.querySelector(".select");
+        select.style.left = `${posicao}%`;
+    }
 
-    <div class="profile-info">
-        <h1>Informações da conta</h1>
-        <p>Atuialize o seu nome de usuário e e-mail.</p>
+    function selecionaConteudo(elemento) {
+        var li = elemento.parentNode;
+        const elementosLi = document.querySelectorAll(".reset-border");
+        elementosLi.forEach(e => {
+            e.style.border = "none";
+        })
 
-        <label for="name">Nome</label>
-        <input type="text" id="name" name="name"></input>
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email"></input>
-        <input type="submit" value="Salvar">
-
-    </div>
-
-    <div class="update-password">
-        <h1>Atualize a sua senha</h1>
-        <p>Atualize sua senha e mantenha sua segurança</p>
-        <label for="atual">Senha atual.</label>
-        <input type="password" id="atual" name="atual"></input>
-        <label for="new">Nova senha</label>
-        <input type="password" id="new" name="new"></input>
-        <label for="confirm">Confirme a nova senha</label>
-        <input type="password" name="confirm" id="confirm"></input>
-        <input type="submit" value="Salvar">
-    </div>
-
-</div>
+        li.style.borderBottom = "2px solid #28C892"
+    }
+</script>
+</html>

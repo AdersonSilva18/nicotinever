@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'icon',
     ];
 
     /**
@@ -43,5 +44,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
+
+    public function hasIcon()
+    {
+        return $this->icon !== null;
     }
 }
