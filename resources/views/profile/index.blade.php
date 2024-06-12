@@ -591,7 +591,8 @@
         <ul class="paginas">
             <li class="item" onclick="selecionaMenu(0)"><img id="pagina-alvo" src="{{asset('imagens/target.svg')}}"
                                                              alt="ícone de alvo"></li>
-            <li class="item" onclick="selecionaMenu(33.33333333333)"><i class="bi bi-house i-pag"></i></li>
+
+            <li class="item" onclick="selecionaMenu(33.33333333333)"> <a href="{{route('feed.index')}}"><i class="bi bi-house i-pag"></i></a> </li>
             <li class="item" onclick="selecionaMenu(66.7666666666666)"><i class="bi bi-person i-pag"></i></li>
         </ul>
     </nav>

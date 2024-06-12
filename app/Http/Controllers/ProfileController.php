@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index($user)
     {
         $user = User::find($user);
-        $feeds = $user->feeds;
+        $feeds = $user->feeds()->orderByDesc('created_at')->get();
         return view('profile.index', compact(['feeds', 'user']));
     }
 
