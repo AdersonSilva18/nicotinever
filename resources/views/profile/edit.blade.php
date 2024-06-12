@@ -641,7 +641,7 @@
 
 <div class="main-info">
 
-    <form method="post" action="{{ route('attIcon') }}">
+    <form method="post" action="{{ route('attIcon') }}" enctype="multipart/form-data">
         @csrf
         <div class="profile-image">
             <h1>Atualize a sua foto de perfil.</h1>

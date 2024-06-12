@@ -77,16 +77,16 @@ class ProfileController extends Controller
         $filenameWithExt = $request->file('icon')->getClientOriginalName();
         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
         $extension = $request->file('icon')->getClientOriginalExtension();
-        $iconName = $filename . '_' . auth()->user->id . '_' . time() . '.' . $extension;
+        $iconName = $filename . '_' . auth()->user()->id . '_' . time() . '.' . $extension;
 
         $icon->move(public_path('imagens'), $iconName);
 
-        $pathFinal = 'public/imagens/' . $iconName;
+        $pathFinal = 'imagens/' . $iconName;
 
-        auth()->user->update([
+        auth()->user()->update([
             'icon' => $pathFinal
         ]);
 
-        return redirect()->route('profile.index');
+        return redirect()->route('profile.edit', ['user_id' => auth()->user()->id]);
     }
 }

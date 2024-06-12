@@ -702,13 +702,13 @@
                 <small>Publico <i class="bi bi-caret-down-fill"></i></small>
             </div>
 
-            <form action="{{route('feed.store')}}" method="post">
+            <form action="{{route('feed.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="post-input-container">
                     <textarea name="comentario" rows="3" placeholder="O que Você está pensando?"></textarea>
                     <div class="add-post-links">
                         <input type="file" id="file" name="image" style="display: none;"
-                               accept="image/jpeg, image/png"></input>
+                               accept="image/jpeg, image/png" />
                         <label for="file" class="btn-foto"><i class="bi bi-camera-fill"></i></label>
                         <input type="submit" value="Publicar" class="btn-publicar">
                     </div>
@@ -741,7 +741,7 @@
                 <p class="post-text">
                     {{$feed->comentario}}
                     @if($feed->image !== null)
-                        <img src="{{asset('imagens/pesca.jpg')}}" alt="" class="post-img">
+                        <img src="{{asset($feed->image)}}" alt="" class="post-img">
                     @endif
                 </p>
 

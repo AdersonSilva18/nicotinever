@@ -19,14 +19,14 @@ class FeedController extends Controller
             'comentario' => $request->comentario,
             'user_id' => auth()->user()->id,
         ]);
-
-        if ($request->hasFile('img')) {
-            $filenameWithExt = $request->file('img')->getClientOriginalName();
+        if ($request->hasFile('image')) {
+            $icon = $request->file('image');
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('img')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_'.$feed->id.'_' . time() . '.' . $extension;
-            $path = $request->file('img_itens')->storeAs('public/imagens/feed/', $fileNameToStore);
-            $pathFinal = 'public/imagens/feed/'.$fileNameToStore;
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $iconName = $filename . '_' . $feed->id . '_' . time() . '.' . $extension;
+            $icon->move(public_path('imagens'), $iconName);
+            $pathFinal = 'imagens/' . $iconName;
         } else {
             $pathFinal = null;
         }
