@@ -768,7 +768,7 @@
             <div class="post-roll">
                 <div class="profile-post-icon">
                     <img src="{{asset('imagens/aderson.jpg')}}" alt="">
-                    <div><p>Aderson Bituca</p>
+                    <div><p>Aderson Silva</p>
                         <small>12 de Junho de 2024 às 9:13 <i class="bi bi-caret-down-fill"></i></small>
                     </div>
                 </div>
@@ -804,7 +804,7 @@
             <div class="post-roll">
                 <div class="profile-post-icon">
                     <img src="{{asset('imagens/Nycollas.jpg')}}" alt="">
-                    <div><p>Nycollas Desenbola</p>
+                    <div><p>Nycollas Roque</p>
                         <small>9 de Junho de 2024 às 13:18 <i class="bi bi-caret-down-fill"></i></small>
                     </div>
                 </div>
@@ -840,7 +840,7 @@
             <div class="post-roll">
                 <div class="profile-post-icon">
                     <img src="{{asset('imagens/Pedro.jpg')}}" alt="">
-                    <div><p>Pedro Passa o Fino</p>
+                    <div><p>Pedro Luiz</p>
                         <small>8 de Junho de 2024 às 22:50 <i class="bi bi-caret-down-fill"></i></small>
                     </div>
                 </div>
@@ -876,7 +876,7 @@
             <div class="post-roll">
                 <div class="profile-post-icon">
                     <img src="{{asset('imagens/miguel.jpg')}}" alt="">
-                    <div><p>Milguel Fininho</p>
+                    <div><p>Milguel Pinto Duran</p>
                         <small>11 de Junho de 2024 às 21:36 <i class="bi bi-caret-down-fill"></i></small>
                     </div>
                 </div>
@@ -948,25 +948,25 @@
             <div class="online">
                 <img src="{{asset('imagens/aderson.jpg')}}" alt="Aderson">
             </div>
-            <p>Aderson Bituca</p>
+            <p>Aderson Silva</p>
         </div>
         <div class="online-list">
             <div class="online">
                 <img src="{{asset('imagens/miguel.jpg')}}" alt="Miguel">
             </div>
-            <p>Miguel Fininho</p>
+            <p>Miguel Pinto Duran</p>
         </div>
         <div class="online-list">
             <div class="online">
                 <img src="{{asset('imagens/Nycollas.jpg')}}" alt="Nycollas">
             </div>
-            <p>Nycollas Desenbola</p>
+            <p>Nycollas Roque</p>
         </div>
         <div class="online-list">
             <div class="online">
                 <img src="{{asset('imagens/Pedro.jpg')}}" alt="Pedro">
             </div>
-            <p>Pedro Passa o Fino</p>
+            <p>Pedro Luiz</p>
         </div>
     </div>
 </div>
