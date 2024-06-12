@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use Cloudinary\Cloudinary;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,15 +74,7 @@ class ProfileController extends Controller
             'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $icon = $request->file('icon');
-        $filenameWithExt = $request->file('icon')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('icon')->getClientOriginalExtension();
-        $iconName = $filename . '_' . auth()->user()->id . '_' . time() . '.' . $extension;
-
-        $icon->move(public_path('imagens'), $iconName);
-
-        $pathFinal = 'imagens/' . $iconName;
+        $pathFinal = \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::upload($request->file('icon')->getRealPath())->getSecurePath();
 
         auth()->user()->update([
             'icon' => $pathFinal

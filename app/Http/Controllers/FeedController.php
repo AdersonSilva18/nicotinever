@@ -20,13 +20,7 @@ class FeedController extends Controller
             'user_id' => auth()->user()->id,
         ]);
         if ($request->hasFile('image')) {
-            $icon = $request->file('image');
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $iconName = $filename . '_' . $feed->id . '_' . time() . '.' . $extension;
-            $icon->move(public_path('imagens'), $iconName);
-            $pathFinal = 'imagens/' . $iconName;
+            $pathFinal = \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         } else {
             $pathFinal = null;
         }
