@@ -789,6 +789,22 @@
 
     .i-header {
         color: #88EBC4;
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+
+    .i-header:hover {
+        transform: scale(1.2);
+    }
+
+    header i {
+        color: #88EBC4;
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+
+    header i:hover {
+        transform: scale(1.2);
     }
 
 </style>

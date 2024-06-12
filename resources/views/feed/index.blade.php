@@ -685,8 +685,10 @@
                     <li><a href="{{route('erro')}}"><i class="bi bi-chat-dots-fill"></i>Mensagens</a></li>
                     <li><a href="{{route('erro')}}"><i class="bi bi-bell-fill"></i>Notificações</a></li>
                     <li><a href="{{route('profile.edit')}}"><i class="bi bi-gear-fill"></i>Configurações</a></li>
-                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"><i
-                                class="bi bi-box-arrow-right"></i>Sair</a></li>
+                    <form method="post" action="{{route('logout')}}">
+                        @csrf
+                        <li><button type="submit" style="border: none; background: transparent;cursor: pointer"><i class="bi bi-box-arrow-right"></i>Sair</button></li>
+                    </form>
                 </div>
             </ul>
         </div>
@@ -718,8 +720,8 @@
         @foreach($feeds as $feed)
             <div class="post-container">
                 <div class="post-roll">
-                        <a href="{{route('profile.index', ['user_id' => $feed->user->id])}}">
-                    <div class="profile-post-icon">
+                    <a href="{{route('profile.index', ['user_id' => $feed->user->id])}}">
+                        <div class="profile-post-icon">
                             <img src="{{asset($feed->user->icon)}}" alt="">
                             <div><p>{{$feed->user->name}}</p>
 
@@ -729,8 +731,8 @@
                                 <small>{{$date->isoFormat('D [de] MMMM [de] YYYY [às] HH:mm')}}<i
                                         class="bi bi-caret-down-fill"></i></small>
                             </div>
-                    </div>
-                        </a>
+                        </div>
+                    </a>
 
 
                     <a href="#"><i class="bi bi-three-dots-vertical"></i></a>
