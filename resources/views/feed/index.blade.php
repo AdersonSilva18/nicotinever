@@ -380,6 +380,9 @@
     .profile-post-icon img {
         margin-right: 10px;
         width: 40px;
+        height: 40px;
+        object-fit: cover;
+        object-position: center;
         border-radius: 50%;
     }
 

@@ -61,6 +61,7 @@
 
     .foto-perfil {
         width: 100px;
+        height: 100px;
         border-radius: 50%;
     }
 
@@ -253,6 +254,9 @@
     .profile-post-icon img {
         margin-right: 10px;
         width: 40px;
+        height: 40px;
+        object-fit: cover;
+        object-position: center;
         border-radius: 50%;
     }
 
@@ -369,6 +373,7 @@
 
         .foto-perfil {
             width: 14.3vw;
+            height: 14.3vw;
         }
 
     }
@@ -490,6 +495,7 @@
         /* --------------------- */
         .foto-perfil {
             max-width: 140px;
+            max-height: 140px;
         }
 
         .menu-icon {
