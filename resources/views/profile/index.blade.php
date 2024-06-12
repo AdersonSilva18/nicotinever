@@ -28,7 +28,7 @@
 
     body {
         height: 100vh;
-        background-color: #001526;
+        background-color: #001526 !important;
     }
 
     .cabecalho {
